@@ -10,10 +10,19 @@ export default function Home() {
           <span className="bg-[#f5c80c] text-[#1e2a32] px-2 py-0.5 rounded font-bold text-[10px] tracking-wide">UEN: 202625392H</span>
           <span className="text-gray-300">Singapore & Southeast Asia Operations</span>
         </div>
-        <button className="flex items-center gap-2 hover:text-[#f5c80c] transition">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2" fill="none"/></svg>
-          SG - EN <span className="ml-1">›</span>
-        </button>
+        <div className="flex items-center gap-4">
+          <a href="https://www.facebook.com/kaykaysafety" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[#f5c80c] transition" title="Facebook Page">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+            </svg>
+            <span className="hidden xs:inline">Facebook</span>
+          </a>
+          <span className="text-gray-600">|</span>
+          <button className="flex items-center gap-2 hover:text-[#f5c80c] transition">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2" fill="none"/></svg>
+            SG - EN <span className="ml-1">›</span>
+          </button>
+        </div>
       </div>
 
       {/* Header - Kept only the logo and brand name */}
@@ -229,8 +238,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* KK Brand Heritage Section */}
+      <section className="py-16 sm:py-24 px-4 sm:px-8 bg-gray-50 border-t" id="about">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
+          
+          {/* Heritage Text */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#f5c80c] rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-sm">📜</span>
+              </div>
+              <span className="text-[#f5c80c] font-bold text-sm tracking-widest uppercase">BRAND HERITAGE</span>
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-black text-[#1e2a32] leading-tight">
+              The Story of KK:<br />
+              Craftsmanship & Dedication
+            </h2>
+            <div className="w-12 h-1 bg-[#f5c80c]" />
+
+            <div className="space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed font-sans">
+              <p>
+                Forty-five years ago, in a modest workshop filled with the hum of sewing machines and the scent of freshly pressed fabric, a young Chinese national named <strong className="text-[#1e2a32] font-semibold">Ng Chee Chow</strong> began to weave his dream into reality. He believed that every worker deserved a uniform that was more than just clothing—it should be a symbol of pride, unity, and purpose.
+              </p>
+              <p>
+                With steady hands and an unwavering vision, Ng Chee Chow stitched the first uniforms himself, each seam carrying his dedication to quality and care. Word spread quickly through Singapore’s bustling streets and busy markets. Soon, his workshop became a trusted name, supplying durable, well-crafted uniforms to industries across the nation.
+              </p>
+              <p>
+                Through the decades, fashions changed, technologies evolved, and the city grew taller and faster. Yet, the heart of the company remained the same: a commitment to craftsmanship, reliability, and respect for the people who wear our work.
+              </p>
+              <p>
+                Today, we carry forward Ng Chee Chow’s legacy with the same passion that started it all. Every thread we sew is a continuation of his dream—a promise that the values he built this company upon will endure for generations to come.
+              </p>
+            </div>
+          </div>
+
+          {/* Heritage Image / Visual Element */}
+          <div className="relative space-y-6">
+            <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-gray-250">
+              <Image 
+                src="/images/heritage_workshop.png" 
+                alt="Vintage Tailor Workshop - Ng Chee Chow Heritage" 
+                fill 
+                className="object-cover filter sepia-[20%] hover:scale-105 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1e2a32]/85 via-transparent to-transparent flex items-end p-6">
+                <div className="text-white">
+                  <p className="text-xs uppercase font-extrabold text-[#f5c80c] tracking-widest mb-1">In Memory & Honor</p>
+                  <h3 className="text-lg font-black">Mr. Ng Chee Chow</h3>
+                  <p className="text-xs text-gray-300">Founder & Original Craftsman (Circa 1981)</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Quick stats / values banner */}
+            <div className="grid grid-cols-3 gap-4 bg-white p-5 rounded-lg border border-gray-150 shadow-sm text-center">
+              <div>
+                <div className="text-xl font-extrabold text-[#1e2a32]">1981</div>
+                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Established</div>
+              </div>
+              <div className="border-x border-gray-200">
+                <div className="text-xl font-extrabold text-[#1e2a32]">100%</div>
+                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Dedicated</div>
+              </div>
+              <div>
+                <div className="text-xl font-extrabold text-[#1e2a32]">45+ Yrs</div>
+                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Of Trust</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* Commitments Section */}
-      <section className="py-12 sm:py-16 px-4 sm:px-8 border-t bg-white" id="about">
+      <section className="py-12 sm:py-16 px-4 sm:px-8 border-t bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
@@ -386,12 +468,18 @@ export default function Home() {
           <div className="space-y-4 text-center md:text-left">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1e2a32] leading-tight">Contact us</h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">Our sales and support teams are available to assist you with your projects. UEN: 202625392H. Email: ops.kayekaye_safety_solution@outlook.sg. Hotline support is available Monday to Friday: 8:30am - 5:30pm.</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center md:justify-start">
               <a href="https://wa.me/6591234567" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
                 WhatsApp Hotline
               </a>
               <a href="mailto:ops.kayekaye_safety_solution@outlook.sg" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
                 Email Us
+              </a>
+              <a href="https://www.facebook.com/kaykaysafety" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+                </svg>
+                Facebook Page
               </a>
             </div>
           </div>
@@ -477,6 +565,12 @@ export default function Home() {
               <span className="text-[#f5c80c] block font-extrabold font-sans">
                 📞 WhatsApp Support: +65 9123 4567
               </span>
+              <a href="https://www.facebook.com/kaykaysafety" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#f5c80c] transition flex items-center gap-1.5 font-semibold">
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+                </svg>
+                Facebook Page
+              </a>
             </div>
           </div>
         </div>
