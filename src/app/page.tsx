@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProductCarousel from "./components/ProductCarousel";
 
 export default function Home() {
   return (
@@ -53,7 +54,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[450px] sm:h-[500px] md:h-[600px] overflow-hidden">
         <Image
-          src="/images/hero_background.png"
+          src="/images/hero_background.avif"
           alt="Safety Solutions Hero"
           fill
           className="object-cover"
@@ -122,69 +123,81 @@ export default function Home() {
       {/* Safety Catalog Grid Section */}
       <section id="catalog" className="py-12 sm:py-16 px-4 sm:px-8 bg-white border-t">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#1e2a32] mb-2 text-center font-sans">Safety Garment Catalog</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#1e2a32] mb-2 text-center font-sans">Safety Catalog</h2>
           <p className="text-center text-gray-500 text-sm sm:text-base mb-8">Premium Head-to-Toe Work Protection Equipment</p>
           <div className="w-12 h-1 bg-[#f5c80c] mx-auto mb-12" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {/* Cloths */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
-              <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/cloths.png" alt="High-Visibility Clothing" fill className="object-contain p-4" />
-              </div>
-              <div className="p-5 sm:p-6 space-y-3">
-                <div>
-                  <span className="text-[10px] sm:text-xs uppercase font-extrabold text-[#f5c80c] tracking-widest block">Garments</span>
-                  <h3 className="font-bold text-base sm:text-lg text-[#1e2a32] mt-0.5">High-Visibility Clothing (Cloths)</h3>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">High-mobility, abrasion-resistant shirts, pants, and jackets engineered for scaffolding and construction environments.</p>
-                <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
-                  <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 513 / ISO 13688</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20High-Visibility%20Clothing%20(Cloths)" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
-                </div>
-              </div>
-            </div>
-
             {/* Shoe */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
               <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/shoe.png" alt="Safety Footwear" fill className="object-contain p-4" />
+                <Image src="/images/shoe.avif" alt="Safety Footwear" fill className="object-contain p-4" />
               </div>
               <div className="p-5 sm:p-6 space-y-3">
                 <div>
                   <span className="text-[10px] sm:text-xs uppercase font-extrabold text-[#f5c80c] tracking-widest block">Footwear</span>
                   <h3 className="font-bold text-base sm:text-lg text-[#1e2a32] mt-0.5">Safety Footwear (Shoe)</h3>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Heavy-duty steel-toe and anti-slip footwear providing essential protection in high-risk fabrication yards.</p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  Heavy-duty steel-toe and anti-slip footwear providing essential protection in high-risk fabrication yards.
+                </p>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {["KPR", "NITTI", "D&D", "ACE SAFETY", "STAR SAFETY", "SAFETY JOGGER"].map((brand) => (
+                    <span key={brand} className="bg-gray-100 text-gray-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-gray-200">
+                      {brand}
+                    </span>
+                  ))}
+                </div>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">EN ISO 20345 S3</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Footwear%20(Shoe)" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Footwear%20(Shoe)" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
 
             {/* Helmet */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
-              <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/helmet.png" alt="Safety Helmet" fill className="object-contain p-4" />
+              <div className="h-56 sm:h-64 overflow-hidden relative">
+                <ProductCarousel
+                  images={[
+                    { src: "/images/helmet1.avif", alt: "Yellow ABS Hard Hat" },
+                    { src: "/images/helmet2.avif", alt: "Blue Ventilated Safety Helmet" },
+                    { src: "/images/helmet3.avif", alt: "White Climbing Safety Helmet" },
+                  ]}
+                />
               </div>
               <div className="p-5 sm:p-6 space-y-3">
                 <div>
                   <span className="text-[10px] sm:text-xs uppercase font-extrabold text-[#f5c80c] tracking-widest block">Head Protection</span>
                   <h3 className="font-bold text-base sm:text-lg text-[#1e2a32] mt-0.5">Safety Helmets & Hard Hats</h3>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">High-impact ABS construction helmets with adjustable suspension and chin straps, certified for site builders.</p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  High-impact ABS construction helmets, ventilated safety hard hats, and climbing-style helmets with 4-point adjustable chin straps and suspension. Certified for site builders.
+                </p>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {["ABS Hard Hats", "Ventilated Helmets", "Climbing-Style", "4-Point Chin Strap", "Full Brim Option"].map((type) => (
+                    <span key={type} className="bg-gray-100 text-gray-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-gray-200">
+                      {type}
+                    </span>
+                  ))}
+                </div>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 98 / ANSI Z89.1</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Helmets" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Helmets" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
 
             {/* Gloves */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
-              <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/gloves.png" alt="Protective Gloves" fill className="object-contain p-4" />
+              <div className="h-56 sm:h-64 overflow-hidden relative">
+                <ProductCarousel
+                  images={[
+                    { src: "/images/gloves1.avif", alt: "Heavy-Duty Leather Gloves" },
+                    { src: "/images/gloves2.avif", alt: "Chemical & Cut Resistant Gloves" },
+                    { src: "/images/gloves3.avif", alt: "High-Dexterity Grip Gloves" },
+                  ]}
+                />
               </div>
               <div className="p-5 sm:p-6 space-y-3">
                 <div>
@@ -194,7 +207,7 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Cut, chemical, and thermal-resistant safety gloves with rubberized palm grip for optimal heavy industrial handling.</p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">EN 388 / EN 374</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Protective%20Gloves" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Protective%20Gloves" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -202,7 +215,7 @@ export default function Home() {
             {/* Overall */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
               <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/overall.png" alt="Industrial Overalls" fill className="object-contain p-4" />
+                <Image src="/images/overall.avif" alt="Industrial Overalls" fill className="object-contain p-4" />
               </div>
               <div className="p-5 sm:p-6 space-y-3">
                 <div>
@@ -212,7 +225,7 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Heavy-duty jumpsuits and overalls featuring high-visibility retro-reflective accents, flame retardancy, and chemical protection.</p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 473 / ISO 11612</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Industrial%20Overalls" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Industrial%20Overalls" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -220,17 +233,19 @@ export default function Home() {
             {/* Harness */}
             <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
               <div className="p-4 bg-gray-50 flex items-center justify-center h-56 sm:h-64 relative">
-                <Image src="/images/harness.png" alt="Fall Protection Harness" fill className="object-contain p-4" />
+                <Image src="/images/harness.avif" alt="Fall Protection Harness" fill className="object-contain p-4" />
               </div>
               <div className="p-5 sm:p-6 space-y-3">
                 <div>
                   <span className="text-[10px] sm:text-xs uppercase font-extrabold text-[#f5c80c] tracking-widest block">Height Safety</span>
                   <h3 className="font-bold text-base sm:text-lg text-[#1e2a32] mt-0.5">Fall Protection Harnesses</h3>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Full-body fall protection safety harness and shock-absorbing lanyards, certified for offshore and scaffolding operations.</p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  Full-body fall protection safety harnesses with integrated work positioning belts, standalone safety belts, and shock-absorbing lanyards. Certified for offshore and scaffolding operations.
+                </p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 528 / EN 361</span>
-                  <a href="https://wa.me/6591234567?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Fall%20Protection%20Harnesses" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Fall%20Protection%20Harnesses" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -259,16 +274,16 @@ export default function Home() {
 
             <div className="space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed font-sans">
               <p>
-                Forty-five years ago, in a modest workshop filled with the hum of sewing machines and the scent of freshly pressed fabric, a young Chinese national named <strong className="text-[#1e2a32] font-semibold">Ng Chee Chow</strong> began to weave his dream into reality. He believed that every worker deserved a uniform that was more than just clothing—it should be a symbol of pride, unity, and purpose.
+                Forty-five years ago, in a modest workshop filled with the hum of sewing machines and the scent of freshly pressed fabric, a young Chinese national named <strong className="text-[#1e2a32] font-semibold">Mr. Ng Chee Chow</strong> began to weave his dream into reality. He believed that every worker deserved a uniform that was more than just clothing—it should be a symbol of pride, unity, and purpose.
               </p>
               <p>
-                With steady hands and an unwavering vision, Ng Chee Chow stitched the first uniforms himself, each seam carrying his dedication to quality and care. Word spread quickly through Singapore’s bustling streets and busy markets. Soon, his workshop became a trusted name, supplying durable, well-crafted uniforms to industries across the nation.
+                With steady hands and an unwavering vision, Mr. Ng Chee Chow stitched the first uniforms himself, each seam carrying his dedication to quality and care. Word spread quickly through Singapore’s bustling streets and busy markets. Soon, his workshop became a trusted name, supplying durable, well-crafted uniforms to industries across the nation.
               </p>
               <p>
                 Through the decades, fashions changed, technologies evolved, and the city grew taller and faster. Yet, the heart of the company remained the same: a commitment to craftsmanship, reliability, and respect for the people who wear our work.
               </p>
               <p>
-                Today, we carry forward Ng Chee Chow’s legacy with the same passion that started it all. Every thread we sew is a continuation of his dream—a promise that the values he built this company upon will endure for generations to come.
+                Today, we carry forward Mr. Ng Chee Chow’s legacy with the same passion that started it all. Every thread we sew is a continuation of his dream—a promise that the values he built this company upon will endure for generations to come.
               </p>
             </div>
           </div>
@@ -277,8 +292,8 @@ export default function Home() {
           <div className="relative space-y-6">
             <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-gray-250">
               <Image 
-                src="/images/heritage_workshop.png" 
-                alt="Vintage Tailor Workshop - Ng Chee Chow Heritage" 
+                src="/images/heritage_workshop.avif" 
+                alt="Vintage Tailor Workshop - Mr. Ng Chee Chow Heritage" 
                 fill 
                 className="object-cover filter sepia-[20%] hover:scale-105 transition duration-500"
               />
@@ -469,7 +484,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1e2a32] leading-tight">Contact us</h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">Our sales and support teams are available to assist you with your projects. UEN: 202625392H. Email: ops.kayekaye_safety_solution@outlook.sg. Hotline support is available Monday to Friday: 8:30am - 5:30pm.</p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center md:justify-start">
-              <a href="https://wa.me/6591234567" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
+              <a href="https://wa.me/6589874075" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
                 WhatsApp Hotline
               </a>
               <a href="mailto:ops.kayekaye_safety_solution@outlook.sg" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
@@ -545,10 +560,10 @@ export default function Home() {
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-white uppercase tracking-widest border-b border-gray-800 pb-2">Safety Gear</h4>
             <ul className="space-y-2.5 text-xs text-gray-400">
-              <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; High-Visibility Clothing</a></li>
+              <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; Protective Gloves</a></li>
               <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; Safety Footwear & Shoes</a></li>
               <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; Hard Hats & Safety Helmets</a></li>
-              <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; Heavy-Duty Coveralls</a></li>
+              <li><a href="#catalog" className="hover:text-[#f5c80c] transition flex items-center gap-1.5">&rsaquo; Fall Protection Harnesses</a></li>
             </ul>
           </div>
 
@@ -563,7 +578,7 @@ export default function Home() {
                 ✉ ops.kayekaye_safety_solution@outlook.sg
               </a>
               <span className="text-[#f5c80c] block font-extrabold font-sans">
-                📞 WhatsApp Support: +65 9123 4567
+                📞 WhatsApp Support: +65 8987 4075
               </span>
               <a href="https://www.facebook.com/kaykaysafety" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#f5c80c] transition flex items-center gap-1.5 font-semibold">
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -594,7 +609,7 @@ export default function Home() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/6591234567"
+        href="https://wa.me/6589874075"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition duration-300 flex items-center justify-center"
