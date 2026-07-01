@@ -29,10 +29,14 @@ export default function Home() {
       {/* Header - Kept only the logo and brand name */}
       <header className="bg-white py-4 px-6 flex items-center justify-between shadow-sm">
         <Link href="/">
-          <div className="flex items-center gap-2">
-            <div className="bg-[#1e2a32] text-[#f5c80c] px-3.5 py-2 rounded font-black text-2xl tracking-tighter shadow-sm">
-              KK
-            </div>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/logo.png"
+              alt="Kaye Kaye Safety Logo"
+              width={42}
+              height={42}
+              className="object-contain"
+            />
             <div className="text-left">
               <h2 className="text-[#1e2a32] font-black text-lg uppercase leading-none tracking-tight">Kaye Kaye</h2>
               <span className="text-[#f5c80c] text-[11px] font-bold uppercase tracking-widest block">Safety Solutions</span>
@@ -529,9 +533,13 @@ export default function Home() {
           {/* Brand Profile */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="bg-[#f5c80c] text-[#111827] px-3.5 py-2 rounded font-black text-2xl tracking-tighter shadow-md">
-                KK
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt="Kaye Kaye Safety Logo"
+                width={42}
+                height={42}
+                className="object-contain"
+              />
               <div className="text-left">
                 <h3 className="font-extrabold text-lg leading-none text-white tracking-tight uppercase">Kaye Kaye</h3>
                 <span className="text-[#f5c80c] text-[10px] font-bold uppercase tracking-wider block mt-0.5">Safety Solutions</span>
