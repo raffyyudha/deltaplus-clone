@@ -154,7 +154,7 @@ export default function Home() {
                 </div>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">EN ISO 20345 S3</span>
-                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Footwear%20(Shoe)" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6581464525?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Footwear%20(Shoe)" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function Home() {
                 </div>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 98 / ANSI Z89.1</span>
-                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Helmets" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6581464525?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Safety%20Helmets" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Cut, chemical, and thermal-resistant safety gloves with rubberized palm grip for optimal heavy industrial handling.</p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">EN 388 / EN 374</span>
-                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Protective%20Gloves" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6581464525?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Protective%20Gloves" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">Heavy-duty jumpsuits and overalls featuring high-visibility retro-reflective accents, flame retardancy, and chemical protection.</p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 473 / ISO 11612</span>
-                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Industrial%20Overalls" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6581464525?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Industrial%20Overalls" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -249,7 +249,7 @@ export default function Home() {
                 </p>
                 <div className="mt-2 pt-4 border-t flex flex-wrap gap-2 justify-between items-center">
                   <span className="text-[10px] sm:text-xs text-gray-400 font-semibold">SS 528 / EN 361</span>
-                  <a href="https://wa.me/6589874075?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Fall%20Protection%20Harnesses" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
+                  <a href="https://wa.me/6581464525?text=Hi%20Kaye%20Kaye,%20I%20would%20like%20to%20inquire%20about%20Fall%20Protection%20Harnesses" target="_blank" rel="noopener noreferrer" className="bg-[#1e2a32] text-white text-xs px-3.5 py-2 font-bold hover:bg-[#2d3f4a] transition rounded">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>
@@ -488,7 +488,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1e2a32] leading-tight">Contact us</h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">Our sales and support teams are available to assist you with your projects. UEN: 202625392H. Email: ops.kayekaye_safety_solution@outlook.sg. Hotline support is available Monday to Friday: 8:30am - 5:30pm.</p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center md:justify-start">
-              <a href="https://wa.me/6589874075" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
+              <a href="https://wa.me/6581464525" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
                 WhatsApp Hotline
               </a>
               <a href="mailto:ops.kayekaye_safety_solution@outlook.sg" className="flex items-center justify-center gap-2 border-2 border-[#1e2a32] px-6 py-2.5 rounded font-bold text-sm text-[#1e2a32] hover:bg-[#1e2a32] hover:text-white transition">
@@ -586,7 +586,7 @@ export default function Home() {
                 ✉ ops.kayekaye_safety_solution@outlook.sg
               </a>
               <span className="text-[#f5c80c] block font-extrabold font-sans">
-                📞 WhatsApp Support: +65 8987 4075
+                📞 WhatsApp Support: +65 8146 4525
               </span>
               <a href="https://www.facebook.com/kaykaysafety" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#f5c80c] transition flex items-center gap-1.5 font-semibold">
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -617,7 +617,7 @@ export default function Home() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/6589874075"
+        href="https://wa.me/6581464525"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25d366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition duration-300 flex items-center justify-center"
