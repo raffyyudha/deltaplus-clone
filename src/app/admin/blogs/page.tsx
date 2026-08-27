@@ -89,14 +89,7 @@ export default function AdminBlogsPage() {
   const fetchPosts = async () => {
     setLoading(true);
     const { data } = await supabase.from("blog_posts").select("*").order("created_at", { ascending: false });
-
-    if (!data || data.length === 0) {
-      // Auto seed initial blog posts into Supabase if empty!
-      const { data: insertedData } = await supabase.from("blog_posts").insert(defaultInitialBlogs).select();
-      if (insertedData) setPosts(insertedData as BlogPost[]);
-    } else {
-      setPosts(data as BlogPost[]);
-    }
+    setPosts((data as BlogPost[]) || []);
     setLoading(false);
   };
 
@@ -109,14 +102,18 @@ export default function AdminBlogsPage() {
       published_at: newState ? new Date().toISOString() : null,
     }).eq("id", post.id);
     toast.success(newState ? "Article published!" : "Article unpublished!");
-    fetchPosts();
+    setPosts(prev => prev.map(p => p.id === post.id ? { ...p, is_published: newState } : p));
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
-    await supabase.from("blog_posts").delete().eq("id", id);
-    toast.success("Blog post deleted!");
-    fetchPosts();
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+    if (error) {
+      toast.error("Failed to delete post: " + error.message);
+    } else {
+      toast.success("Blog post deleted!");
+      setPosts(prev => prev.filter(p => p.id !== id));
+    }
   };
 
   if (loading) return <div className="flex items-center justify-center h-64"><p className="text-sm text-gray-400 animate-pulse font-bold">Loading blog articles...</p></div>;

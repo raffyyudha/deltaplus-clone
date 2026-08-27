@@ -89,16 +89,7 @@ export default function ProductsManagerPage() {
   const fetchProducts = async () => {
     setLoading(true);
     const { data } = await supabase.from("products").select("*").order("sort_order");
-
-    if (!data || data.length === 0) {
-      // Auto seed initial products into Supabase if empty!
-      const { data: insertedData } = await supabase.from("products").insert(defaultInitialProducts).select();
-      if (insertedData) {
-        setProducts(insertedData as Product[]);
-      }
-    } else {
-      setProducts(data as Product[]);
-    }
+    setProducts((data as Product[]) || []);
     setLoading(false);
   };
 
