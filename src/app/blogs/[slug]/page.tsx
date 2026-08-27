@@ -3,6 +3,7 @@ import type { BlogPost } from "@/lib/database.types";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
 
+export const runtime = "edge";
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

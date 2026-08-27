@@ -1,6 +1,8 @@
 import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const defaultSections = {
   settings: {
     uen: "202625392H",
