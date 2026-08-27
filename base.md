@@ -1,8 +1,8 @@
 Business Name: Kaye Kaye safety solutions pte ltd / KK
 Operating Locations: South east Asia / Singapore
 Business Email: ops.kayekaye_safety_solution@outlook.sg
-Business Overview: Kaye Kaye Safety Solution Pte. Ltd. (UEN: 202625392H) is a premier provider of specialized personal protective equipment (PPE) and industrial safety apparel. Engineered for high-risk environments, our product suite serves the foundational pillars of the industrial workforce, including construction, scaffolding, welding, marine, and offshore oil and gas sectors.
-​Building upon a legacy of trust, Kaye Kaye Safety Solution has strategically acquired the exclusive trademarks and rights of the heritage KK brand—reimagining a classic line of industrial shirts, pants, and heavy-duty overalls for the modern safety landscape. We combine the rugged durability of the time-tested KK line with contemporary compliance standards, ensuring that frontline workers are not just protected, but equipped to perform.
+Business Overview: Kaye Kaye Safety Solution Pte. Ltd. (UEN: 202625392H) is a premier provider of specialized personal protective equipment (PPE) and industrial safety apparel. Engineered for high-risk environments, oursad product suite serves the foundational pillars of the industrial workforce, including construction, scaffolding, welding, marine, and offshore oil and gas sectors.
+​Building upon a legacy of trust, Kaye asdasKaye Safety Solution has strategically acquired the exclusive trademarks and rights of the heritage KK brand—reimagining a classic line of industrial shirts, pants, and heavy-duty overalls for the modern safety landscape. We combine the rugged durability of the time-tested KK line with contemporary compliance standards, ensuring that frontline workers are not just protected, but equipped to perform.
 ​Value Proposition
 ​At Kaye Kaye Safety Solution, we understand that industrial apparel is more than just uniform—it is the first line of defense. Our value proposition stands on three core pillars:
 ​1. Sector-Specific Engineering
