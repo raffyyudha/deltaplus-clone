@@ -3,6 +3,7 @@ import type { BlogPost } from "@/lib/database.types";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
 
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 

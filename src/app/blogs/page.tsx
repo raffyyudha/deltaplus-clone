@@ -3,6 +3,7 @@ import type { BlogPost } from "@/lib/database.types";
 import Image from "next/image";
 import Link from "next/link";
 
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
