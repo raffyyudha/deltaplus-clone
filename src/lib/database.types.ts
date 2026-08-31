@@ -43,6 +43,12 @@ export interface CtaBlock {
   button_link: string;
 }
 
+export interface InternalLink {
+  id: string;
+  anchor_text: string;
+  url: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -66,6 +72,7 @@ export interface BlogPost {
   content_blocks: ContentBlock[];
   faqs: FaqItem[];
   cta: CtaBlock;
+  internal_links: InternalLink[];
 }
 
 export interface KeepaliveLog {
