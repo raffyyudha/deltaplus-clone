@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import ImageUploader from "../../components/ImageUploader";
+import RichContentEditor from "../../components/RichContentEditor";
 import SaveButton from "../../components/SaveButton";
 import toast from "react-hot-toast";
 import type { ContentBlock, FaqItem, CtaBlock, InternalLink } from "@/lib/database.types";
@@ -28,10 +29,8 @@ export default function NewBlogPostApexCMS() {
   const [coverImage, setCoverImage] = useState("");
   const [coverImageCaption, setCoverImageCaption] = useState("");
 
-  // Dynamic Content Blocks
-  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([
-    { id: "1", type: "paragraph", value: "Write your opening paragraph here..." },
-  ]);
+  // Single Content Box (Markdown)
+  const [articleContent, setArticleContent] = useState("");
 
   // FAQs
   const [faqs, setFaqs] = useState<FaqItem[]>([]);
@@ -57,36 +56,69 @@ export default function NewBlogPostApexCMS() {
     setSeoTitle(val);
   };
 
-  // Block Builder Methods
-  const addBlock = (type: ContentBlock["type"]) => {
-    const newBlock: ContentBlock = {
-      id: Date.now().toString(),
-      type,
-      value: "",
-      caption: type === "image" ? "" : undefined,
-      alt: type === "image" ? "" : undefined,
+  // Convert markdown content to content_blocks for backward compatibility
+  const markdownToContentBlocks = (md: string): ContentBlock[] => {
+    const lines = md.split("\n");
+    const blocks: ContentBlock[] = [];
+    let currentParagraph = "";
+    let blockId = 1;
+
+    const flushParagraph = () => {
+      if (currentParagraph.trim()) {
+        blocks.push({
+          id: (blockId++).toString(),
+          type: "paragraph",
+          value: currentParagraph.trim(),
+        });
+        currentParagraph = "";
+      }
     };
-    setContentBlocks((prev) => [...prev, newBlock]);
-  };
 
-  const updateBlock = (id: string, field: keyof ContentBlock, val: string) => {
-    setContentBlocks((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, [field]: val } : b))
-    );
-  };
+    for (const line of lines) {
+      const trimmed = line.trim();
 
-  const moveBlock = (index: number, direction: "up" | "down") => {
-    if ((direction === "up" && index === 0) || (direction === "down" && index === contentBlocks.length - 1)) return;
-    const newBlocks = [...contentBlocks];
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
-    const temp = newBlocks[index];
-    newBlocks[index] = newBlocks[targetIndex];
-    newBlocks[targetIndex] = temp;
-    setContentBlocks(newBlocks);
-  };
-
-  const removeBlock = (id: string) => {
-    setContentBlocks((prev) => prev.filter((b) => b.id !== id));
+      if (trimmed.startsWith("## ")) {
+        flushParagraph();
+        blocks.push({
+          id: (blockId++).toString(),
+          type: "h2",
+          value: trimmed.replace(/^## /, ""),
+        });
+      } else if (trimmed.startsWith("### ")) {
+        flushParagraph();
+        blocks.push({
+          id: (blockId++).toString(),
+          type: "h3",
+          value: trimmed.replace(/^### /, ""),
+        });
+      } else if (trimmed.startsWith("> ")) {
+        flushParagraph();
+        blocks.push({
+          id: (blockId++).toString(),
+          type: "callout",
+          value: trimmed.replace(/^> /, ""),
+        });
+      } else if (trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)) {
+        flushParagraph();
+        const match = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        if (match) {
+          blocks.push({
+            id: (blockId++).toString(),
+            type: "image",
+            value: match[2],
+            alt: match[1],
+            caption: match[1],
+          });
+        }
+      } else if (trimmed === "" || trimmed === "---") {
+        flushParagraph();
+      } else {
+        if (currentParagraph) currentParagraph += "\n";
+        currentParagraph += trimmed;
+      }
+    }
+    flushParagraph();
+    return blocks;
   };
 
   // FAQ Methods
@@ -102,19 +134,6 @@ export default function NewBlogPostApexCMS() {
     setFaqs((prev) => prev.filter((f) => f.id !== id));
   };
 
-  // Internal Link Methods
-  const addInternalLink = () => {
-    setInternalLinks((prev) => [...prev, { id: Date.now().toString(), anchor_text: "", url: "" }]);
-  };
-
-  const updateInternalLink = (id: string, field: "anchor_text" | "url", val: string) => {
-    setInternalLinks((prev) => prev.map((l) => (l.id === id ? { ...l, [field]: val } : l)));
-  };
-
-  const removeInternalLink = (id: string) => {
-    setInternalLinks((prev) => prev.filter((l) => l.id !== id));
-  };
-
   // Save Post
   const handleSave = async () => {
     if (!title) {
@@ -122,18 +141,10 @@ export default function NewBlogPostApexCMS() {
       return;
     }
 
-    // Convert blocks to simple text fallback for legacy readers
-    const contentFallback = contentBlocks
-      .map((b) => {
-        if (b.type === "h2") return `\n## ${b.value}\n`;
-        if (b.type === "h3") return `\n### ${b.value}\n`;
-        if (b.type === "image") return `\n![${b.alt || "Image"}](${b.value})\n*${b.caption || ""}*\n`;
-        if (b.type === "callout") return `\n> ${b.value}\n`;
-        return b.value;
-      })
-      .join("\n\n");
+    // Generate content_blocks from markdown for backward compatibility
+    const contentBlocks = markdownToContentBlocks(articleContent);
 
-    const excerpt = metaDescription || contentBlocks.find((b) => b.type === "paragraph")?.value.slice(0, 160) || "";
+    const excerpt = metaDescription || articleContent.split("\n").find((l) => l.trim() && !l.startsWith("#") && !l.startsWith(">"))?.slice(0, 160) || "";
 
     const { error } = await supabase.from("blog_posts").insert({
       title,
@@ -141,7 +152,7 @@ export default function NewBlogPostApexCMS() {
       slug: slug || generateSlug(title),
       meta_description: metaDescription,
       excerpt,
-      content: contentFallback,
+      content: articleContent,
       cover_image: coverImage,
       cover_image_caption: coverImageCaption,
       author,
@@ -375,230 +386,13 @@ export default function NewBlogPostApexCMS() {
 
           <hr className="border-gray-300 my-6" />
 
-          {/* DYNAMIC CONTENT BLOCKS */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm font-black text-[#e52e2e] uppercase tracking-wider">
-                DYNAMIC CONTENT BLOCKS
-              </h2>
-              <span className="text-xs font-bold text-gray-400">
-                {contentBlocks.length} blocks configured
-              </span>
-            </div>
-
-            {/* Block Builder Controls */}
-            <div className="flex flex-wrap gap-3 items-center justify-center p-4 bg-gray-100 rounded-xl border border-gray-300">
-              <button
-                type="button"
-                onClick={() => addBlock("paragraph")}
-                className="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition shadow-xs"
-              >
-                + Add Paragraph
-              </button>
-              <button
-                type="button"
-                onClick={() => addBlock("h2")}
-                className="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition shadow-xs"
-              >
-                + Add H2 Heading
-              </button>
-              <button
-                type="button"
-                onClick={() => addBlock("h3")}
-                className="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition shadow-xs"
-              >
-                + Add H3 Heading
-              </button>
-              <button
-                type="button"
-                onClick={() => addBlock("image")}
-                className="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition shadow-xs"
-              >
-                + Add Image Block
-              </button>
-              <button
-                type="button"
-                onClick={() => addBlock("callout")}
-                className="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition shadow-xs"
-              >
-                + Add Callout Box
-              </button>
-            </div>
-
-            {/* Configured Blocks List */}
-            <div className="space-y-4">
-              {contentBlocks.map((block, idx) => (
-                <div key={block.id} className="bg-white border border-gray-300 rounded-xl p-4 shadow-sm relative group">
-                  
-                  {/* Block Header Toolbar */}
-                  <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
-                      Block #{idx + 1} — {block.type}
-                    </span>
-
-                    <div className="flex items-center gap-1">
-                      <button
-                        type="button"
-                        onClick={() => moveBlock(idx, "up")}
-                        disabled={idx === 0}
-                        className="p-1 hover:bg-gray-100 rounded text-xs font-bold disabled:opacity-30"
-                        title="Move Up"
-                      >
-                        ▲
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => moveBlock(idx, "down")}
-                        disabled={idx === contentBlocks.length - 1}
-                        className="p-1 hover:bg-gray-100 rounded text-xs font-bold disabled:opacity-30"
-                        title="Move Down"
-                      >
-                        ▼
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => removeBlock(block.id)}
-                        className="p-1 text-red-500 hover:bg-red-50 rounded text-xs font-bold"
-                        title="Delete Block"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Block Field Inputs */}
-                  {block.type === "paragraph" && (
-                    <textarea
-                      value={block.value}
-                      onChange={(e) => updateBlock(block.id, "value", e.target.value)}
-                      rows={4}
-                      placeholder="Enter paragraph text..."
-                      className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  )}
-
-                  {block.type === "h2" && (
-                    <input
-                      type="text"
-                      value={block.value}
-                      onChange={(e) => updateBlock(block.id, "value", e.target.value)}
-                      placeholder="Enter H2 Heading title..."
-                      className="w-full p-3 border border-gray-200 rounded-lg text-base font-extrabold focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  )}
-
-                  {block.type === "h3" && (
-                    <input
-                      type="text"
-                      value={block.value}
-                      onChange={(e) => updateBlock(block.id, "value", e.target.value)}
-                      placeholder="Enter H3 Subheading title..."
-                      className="w-full p-3 border border-gray-200 rounded-lg text-sm font-bold focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  )}
-
-                  {block.type === "image" && (
-                    <div className="space-y-3">
-                      <ImageUploader
-                        currentImage={block.value}
-                        onImageChange={(url) => updateBlock(block.id, "value", url)}
-                        label="Inline Image"
-                        folder="blogs/body"
-                      />
-                      <input
-                        type="text"
-                        value={block.caption || ""}
-                        onChange={(e) => updateBlock(block.id, "caption", e.target.value)}
-                        placeholder="Image Caption (italic text below image)"
-                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-[#e52e2e]"
-                      />
-                      <input
-                        type="text"
-                        value={block.alt || ""}
-                        onChange={(e) => updateBlock(block.id, "alt", e.target.value)}
-                        placeholder="Image Alt text (SEO)"
-                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-[#e52e2e]"
-                      />
-                    </div>
-                  )}
-
-                  {block.type === "callout" && (
-                    <textarea
-                      value={block.value}
-                      onChange={(e) => updateBlock(block.id, "value", e.target.value)}
-                      rows={3}
-                      placeholder="Enter callout / quote text..."
-                      className="w-full p-3 border border-[#e52e2e]/30 bg-red-50/20 rounded-lg text-sm italic font-semibold focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  )}
-
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <hr className="border-gray-300 my-6" />
-
-          {/* INTERNAL LINKS (SEO) */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm font-black text-[#e52e2e] uppercase tracking-wider">
-                INTERNAL LINKS (SEO)
-              </h2>
-              <span className="text-xs font-bold text-gray-400">
-                {internalLinks.length} links configured
-              </span>
-            </div>
-            <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
-              Add internal links with targeted keywords as anchor text. These will be displayed as a "Related Articles" section within your blog post for better SEO internal linking.
-            </p>
-
-            {internalLinks.map((link, idx) => (
-              <div key={link.id} className="bg-white border border-gray-300 rounded-xl p-4 shadow-sm relative">
-                <button
-                  type="button"
-                  onClick={() => removeInternalLink(link.id)}
-                  className="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1"
-                >
-                  ✕ Remove
-                </button>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">
-                      ANCHOR TEXT (KEYWORD) #{idx + 1}
-                    </label>
-                    <input
-                      type="text"
-                      value={link.anchor_text}
-                      onChange={(e) => updateInternalLink(link.id, "anchor_text", e.target.value)}
-                      placeholder="e.g. safety shoes in Singapore"
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-xs font-bold focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">
-                      TARGET URL
-                    </label>
-                    <input
-                      type="text"
-                      value={link.url}
-                      onChange={(e) => updateInternalLink(link.id, "url", e.target.value)}
-                      placeholder="e.g. /blogs/safety-shoes-guide or https://kayesafety.com/..."
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-xs font-mono focus:outline-none focus:border-[#e52e2e]"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <button
-              type="button"
-              onClick={addInternalLink}
-              className="bg-white border border-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-gray-50 hover:border-[#e52e2e] transition"
-            >
-              + Add Internal Link
-            </button>
-          </div>
+          {/* SINGLE CONTENT BOX WITH INTEGRATED INTERNAL LINKS */}
+          <RichContentEditor
+            content={articleContent}
+            onChange={setArticleContent}
+            internalLinks={internalLinks}
+            onInternalLinksChange={setInternalLinks}
+          />
 
           <hr className="border-gray-300 my-6" />
 
