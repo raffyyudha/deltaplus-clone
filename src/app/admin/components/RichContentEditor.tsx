@@ -233,7 +233,7 @@ export default function RichContentEditor({
 
   // Simple markdown to HTML preview (basic)
   const renderPreview = (md: string) => {
-    let html = md
+    const html = md
       // Headings
       .replace(/^### (.+)$/gm, '<h3 class="text-lg font-black text-[#1e2a32] mt-6 mb-3">$1</h3>')
       .replace(/^## (.+)$/gm, '<h2 class="text-xl font-black text-[#1e2a32] mt-8 mb-4">$1</h2>')
